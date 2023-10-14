@@ -385,8 +385,9 @@ function getCoords(event) {
 }
 
 function saveCity(city, country) {
-  // var toSave = city;
+  //saves the searched city in local storage
   if (country) {
+    // adds country code if it was inputed
     city += country;
   }
   console.log("Saving:", city);
@@ -404,6 +405,7 @@ function saveCity(city, country) {
 }
 
 function getSavedCities() {
+  //gets the cities localstorage item and adds buttons for each item
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
   var classes = [
     "btn",
