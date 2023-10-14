@@ -333,30 +333,59 @@
 var apiKey = "8c72c62deec365c6dc9f57e7936265d9";
 
 function getCoords(event) {
+  //gets the latitude and longitude of inputed city name
   event.preventDefault();
-  var city = $("#cityInput").val().replaceAll(" ", "");
-  console.log(city);
+  var input = $("#cityInput").val().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+  var city = input[0];
+  if (input[1]) {
+    var country = ", " + input[1];
+  } else {
+    var country = "";
+  }
+  saveCity(city, country);
   $("#cityInput").val("");
   fetch(
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
       city +
+      country +
       "&limit=1&appid=" +
       apiKey
   )
     .then((response) => {
-      console.log(response);
       if (response.ok) {
+        console.log(
+          "URL:",
+          "http://api.openweathermap.org/geo/1.0/direct?q=" +
+            city +
+            country +
+            "&limit=1&appid=" +
+            apiKey
+        );
         return response.json();
       } else {
         //TODO: Error message on not response.ok
       }
     })
     .then((data) => {
+      console.log("Data:", data[0]);
       var lat = data[0].lat;
       var lon = data[0].lon;
       console.log("Latitude:", lat, " Longitude:", lon);
-      getWeather(lat, lon);
+      console.log(data);
+      // getWeather(lat, lon);
     });
+}
+
+function saveCity(city, country) {
+  // var toSave = city;
+  if (country) {
+    city += country;
+  }
+  console.log("Saving:", city);
+  var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+  savedCities.push(city);
+  console.log("Saved:", savedCities);
+  localStorage.setItem("cities", JSON.stringify(savedCities));
 }
 
 $("#citySearch").on("submit", getCoords);
