@@ -335,15 +335,20 @@ var apiKey = "8c72c62deec365c6dc9f57e7936265d9";
 function getCoords(event) {
   //gets the latitude and longitude of inputed city name
   event.preventDefault();
-  var input = $("#cityInput").val().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+  if ($(this).attr("id") == "citySearch") {
+    var input = $("#cityInput").val().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+    $("#cityInput").val("");
+  } else {
+    var input = $(this).text().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+    console.log($(this).text());
+  }
   var city = input[0];
   if (input[1]) {
     var country = ", " + input[1];
   } else {
     var country = "";
   }
-  saveCity(city, country);
-  $("#cityInput").val("");
+
   fetch(
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
       city +
@@ -372,6 +377,9 @@ function getCoords(event) {
       var lon = data[0].lon;
       console.log("Latitude:", lat, " Longitude:", lon);
       console.log(data);
+      if ($(this).attr("id") == "citySearch") {
+        saveCity(city, country);
+      }
       // getWeather(lat, lon);
     });
 }
@@ -383,9 +391,36 @@ function saveCity(city, country) {
   }
   console.log("Saving:", city);
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
-  savedCities.push(city);
-  console.log("Saved:", savedCities);
+  if (!savedCities.includes(city)) {
+    savedCities.push(city);
+    console.log("Saved:", savedCities);
+    var thisCity = $("<button></button>").text(city);
+    thisCity.addClass(
+      "btn btn-secondary form-control text-black my-2 savedCity"
+    );
+    $("#savedCities").append(thisCity);
+  }
   localStorage.setItem("cities", JSON.stringify(savedCities));
 }
 
+function getSavedCities() {
+  var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+  var classes = [
+    "btn",
+    "btn-secondary",
+    "form-control",
+    "text-black",
+    "my-2",
+    "savedCity",
+  ];
+  for (i = 0; i < savedCities.length; i++) {
+    var name = savedCities[i];
+    var thisCity = $("<button></button>").text(name);
+    thisCity.addClass(classes);
+    $("#savedCities").append(thisCity);
+  }
+}
+
+getSavedCities();
 $("#citySearch").on("submit", getCoords);
+$(".savedCity").on("click", getCoords);
