@@ -18,13 +18,13 @@ function getCoords(event) {
     var country = "";
   }
   fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${city}${country}&limit=1&appid=${apiKey}`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}${country}&limit=1&appid=${apiKey}`
   )
     .then((response) => {
       if (response.ok) {
         console.log(
           "City URL:",
-          `http://api.openweathermap.org/geo/1.0/direct?q=${city}${country}&limit=1&appid=${apiKey}`
+          `https://api.openweathermap.org/geo/1.0/direct?q=${city}${country}&limit=1&appid=${apiKey}`
         );
         return response.json();
       } else {
@@ -46,13 +46,13 @@ function getCoords(event) {
 function getWeather(lat, lon) {
   //fetches the weather data for a given latitude and longitude
   fetch(
-    `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
   )
     .then((response) => {
       if (response.ok) {
         console.log(
           "Weather URL:",
-          `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
         );
         return response.json();
       } else {
