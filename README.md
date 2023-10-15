@@ -7,7 +7,7 @@ An application to get the current weather and 5 day forecast for a city. Users c
 ## Site
 
 https://denitrix.github.io/Weather-Dashboard/
-![Screenshot of Website](.assets/images/06-server-side-apis.png)
+![Screenshot of Website](assets/images/06-server-side-apis.png)
 
 ## License
 
