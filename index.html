@@ -18,7 +18,7 @@
                 <input type="text" class="form-control row my-1" id="cityInput">
                 <button type="submit" class="form-control btn btn-primary row">Search</button>
             </form>
-            <div class="container-fluid px-1 text-md-2 text-lg" id="savedCities">
+            <div class="container-fluid px-1 text-md-2 text-sm" id="savedCities">
             </div>
             <!-- Sun &#x2600
             Sun Behind Small Cloud &#x1f324
@@ -35,49 +35,50 @@
         </div>
         
         <div class="container-fluid row me-2">
-            <div class="border my-3 px-0">
-                <h2 class="px-2 m-1 fw-bold h2">Atlanta (9/13/2022) <!-- &#x2600 --> <img src="https://openweathermap.org/img/wn/10d@2x.png" width="75px"></h2>
-                <p class="p-2 m-1 temp">Temp: 76.62&#176F</p>
-                <p class="px-2 m-1 wind">Wind: 8.43 MPH</p>
-                <p class="p-2 m-1 humid">Humidity: 44%</p>
+            <div class="border my-3 px-0" id="currentWeather">
+                <h2 class="px-2 m-1 h2"></h2>
+                <img src="" alt="" width="75px">
+                <p class="p-2 m-1 temp"></p>
+                <p class="px-2 m-1 wind"></p>
+                <p class="p-2 m-1 humid"></p>
             </div>
             <div class="container-fluid p-0">
-                <h4 class="fw-bold p-0">5-Day Forecast:</h3>
-                <div class="container-fluid ps-1 pe-0  row">
+                <h4 class="p-0 h4">5-Day Forecast:</h4>
+                <div class="container-fluid ps-1 pe-0 row" id="forecast">
                     <div class="bg-dark text-light col-md-12 col-lg m-1">
-                        <h5 class="p-.5 fw-bold my-2">9/13/2022</h5>
-                        <img src="https://openweathermap.org/img/wn/01d@2x.png" width="40px">
-                        <p class="p-.5 temp">Temp: 76.62&#176F</p>
-                        <p class="px-.5 wind">Wind: 8.43 MPH</p>
-                        <p class="p-.5 humid">Humidity: 44%</p>
+                        <h5 class="p-.5 h5 my-2"></h5>
+                        <img src="" alt="" width="40px">
+                        <p class="p-.5 temp"></p>
+                        <p class="px-.5 wind"></p>
+                        <p class="p-.5 humid"></p>
                     </div>
                     <div class="bg-dark text-light col-md-12 col-lg m-1">
-                        <h5 class="p-.5 fw-bold my-2">9/13/2022</h5>
-                        <img src="https://openweathermap.org/img/wn/01d@2x.png" width="40px">
-                        <p class="p-.5 temp">Temp: 76.62&#176F</p>
-                        <p class="px-.5 wind">Wind: 8.43 MPH</p>
-                        <p class="p-.5 humid">Humidity: 44%</p>
+                        <h5 class="p-.5 h5 my-2"></h5>
+                        <img src="" alt="" width="40px">
+                        <p class="p-.5 temp"></p>
+                        <p class="px-.5 wind"></p>
+                        <p class="p-.5 humid"></p>
                     </div>
                     <div class="bg-dark text-light col-md-12 col-lg m-1">
-                        <h5 class="p-.5 fw-bold my-2">9/13/2022</h5>
-                        <img src="https://openweathermap.org/img/wn/01d@2x.png" width="40px">
-                        <p class="p-.5 temp">Temp: 76.62&#176F</p>
-                        <p class="px-.5 wind">Wind: 8.43 MPH</p>
-                        <p class="p-.5 humid">Humidity: 44%</p>
+                        <h5 class="p-.5 h5 my-2"></h5>
+                        <img src="" alt="" width="40px">
+                        <p class="p-.5 temp"></p>
+                        <p class="px-.5 wind"></p>
+                        <p class="p-.5 humid"></p>
                     </div>
                     <div class="bg-dark text-light col-md-12 col-lg m-1">
-                        <h5 class="p-.5 fw-bold my-2">9/13/2022</h5>
-                        <img src="https://openweathermap.org/img/wn/01d@2x.png" width="40px">
-                        <p class="p-.5 temp">Temp: 76.62&#176F</p>
-                        <p class="px-.5 wind">Wind: 8.43 MPH</p>
-                        <p class="p-.5 humid">Humidity: 44%</p>
+                        <h5 class="p-.5 h5 my-2"></h5>
+                        <img src="" alt="" width="40px">
+                        <p class="p-.5 temp"></p>
+                        <p class="px-.5 wind"></p>
+                        <p class="p-.5 humid"></p>
                     </div>
                     <div class="bg-dark text-light col-md-12 col-lg my-1 ms-1 me-0">
-                        <h5 class="p-.5 fw-bold my-2">9/13/2022</h5>
-                        <img src="https://openweathermap.org/img/wn/01d@2x.png" width="40px">
-                        <p class="p-.5 temp">Temp: 76.62&#176F</p>
-                        <p class="px-.5 wind">Wind: 8.43 MPH</p>
-                        <p class="p-.5 humid">Humidity: 44%</p>
+                        <h5 class="p-.5 h5 my-2"></h5>
+                        <img src="" alt="" width="40px">
+                        <p class="p-.5 temp"></p>
+                        <p class="px-.5 wind"></p>
+                        <p class="p-.5 humid"></p>
                     </div>
                 </div>
             </div>
