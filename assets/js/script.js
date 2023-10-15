@@ -5,10 +5,11 @@ function getCoords(event) {
   event.preventDefault();
   if ($(this).attr("id") == "citySearch") {
     var input = $("#cityInput").val().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+    console.log("City Name:", input);
     $("#cityInput").val("");
   } else {
-    var input = $(this).text().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
-    console.log($(this).text());
+    var input = $(event.target).text().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+    console.log("City Name:", $(event.target).text());
   }
   var city = input[0];
   if (input[1]) {
@@ -35,7 +36,9 @@ function getCoords(event) {
       var lat = data[0].lat;
       var lon = data[0].lon;
       console.log("Latitude:", lat, " Longitude:", lon);
-      saveCity(city, country.replaceAll(",", ", "));
+      if ($(this).attr("id") == "citySearch") {
+        saveCity(data[0].name, country.replaceAll(",", ", "));
+      }
       getWeather(lat, lon);
     });
 }
@@ -77,7 +80,7 @@ function getWeather(lat, lon) {
             dayjs.unix(data.list[0].dt).format("(MM/DD/YYYY)")
         );
       $("#currentWeather") //changes the currentWeather img to the current weather icon
-        .children("img")
+        .find("img")
         .attr({
           src: `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`,
           alt: data.list[0].weather[0].main + " weather icon",
@@ -102,12 +105,11 @@ function getWeather(lat, lon) {
             "Day " + (i + 2) + ":",
             data.list[dayIndex],
             date,
-            dayIndex,
-            val
+            dayIndex
           );
           $(val) //changes the day's forecast header to the city name
             .children("h5")
-            .text(dayjs.unix(data.list[0].dt).format("MM/DD/YYYY"));
+            .text(dayjs.unix(data.list[dayIndex].dt).format("MM/DD/YYYY"));
           $(val) //changes the day's forecast img to the current weather icon
             .children("img")
             .attr({
@@ -129,29 +131,33 @@ function getWeather(lat, lon) {
 
 function saveCity(city, country) {
   //saves the searched city in local storage
-  city = city[0].toUpperCase() + city.slice(1);
   if (country) {
     // adds country code if it was inputed
-    city += country;
+    city += country.toUpperCase();
   }
   console.log("Saving:", city);
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
   if (!savedCities.includes(city)) {
     savedCities.push(city);
-    console.log("Saved:", savedCities);
     var thisCity = $("<button></button>").text(city);
     thisCity.addClass(
       "btn btn-secondary form-control text-black my-2 savedCity"
     );
     $("#savedCities").append(thisCity);
   }
+  while (savedCities.length > 15) {
+    savedCities.shift();
+  }
   localStorage.setItem("cities", JSON.stringify(savedCities));
+  getSavedCities();
 }
 
 function getSavedCities() {
   //gets the cities localstorage item and adds buttons for each item
+  $("#savedCities").html("");
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
-  for (i = 0; i < savedCities.length; i++) {
+  console.log("Saved:", savedCities);
+  for (i = savedCities.length - 1; i > -1; i--) {
     var name = savedCities[i];
     var thisCity = $("<button></button>").text(name);
     thisCity.addClass(
@@ -164,4 +170,7 @@ function getSavedCities() {
 getSavedCities();
 getWeather(0, 0);
 $("#citySearch").on("submit", getCoords);
-$(".savedCity").on("click", getCoords);
+$(".savedCity").on("click", (event) => {
+  console.log("test");
+  getCoords(event);
+});
