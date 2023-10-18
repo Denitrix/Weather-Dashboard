@@ -4,11 +4,11 @@ function getCoords(event) {
   //gets the latitude and longitude of inputed city name
   event.preventDefault();
   if ($(this).attr("id") == "citySearch") {
-    var input = $("#cityInput").val().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+    var input = $("#cityInput").val().split(","); //seperates country code from city name if inputed
     console.log("City Name:", input);
     $("#cityInput").val("");
   } else {
-    var input = $(event.target).text().replaceAll(" ", "").split(","); //seperates country code from city name if inputed
+    var input = $(event.target).text().split(","); //seperates country code from city name if inputed
     console.log("City Name:", $(event.target).text());
   }
   var city = input[0];
