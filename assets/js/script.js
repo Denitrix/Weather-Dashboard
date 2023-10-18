@@ -170,7 +170,4 @@ function getSavedCities() {
 getSavedCities();
 getWeather(0, 0);
 $("#citySearch").on("submit", getCoords);
-$(".savedCity").on("click", (event) => {
-  console.log("test");
-  getCoords(event);
-});
+$(document).delegate(".savedCity", "click", getCoords);
